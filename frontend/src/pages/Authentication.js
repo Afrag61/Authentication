@@ -10,7 +10,6 @@ export default AuthenticationPage;
 export const action = async ({request}) => {
   const searchParams = new URL(request.url).searchParams
   const mode = searchParams.get('mode') || 'login'
-  console.log(searchParams.get('mode'));
 
   if(mode !== 'login' && mode !== 'signup'){
     throw new Response(JSON.stringify({message: 'Unsupported mode.'}), {status: 422})
@@ -37,6 +36,14 @@ export const action = async ({request}) => {
   if (!response.ok){
     throw new Response(JSON.stringify({message: 'Could not authenticate user.'}),{status: 500})
   }
+
+  const resData = await response.json()
+  const token = resData.token
+
+  localStorage.setItem("token", token)
+  const expiration = new Date()
+  expiration.setHours(expiration.getHours() + 1)
+  localStorage.setItem("expiration", expiration.toISOString())
 
   return redirect('/')
 }

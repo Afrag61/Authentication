@@ -5,7 +5,6 @@ import classes from './EventsList.module.css';
 
 function EventsList({events}) {
   // const events = useLoaderData();
-  console.log(events.image);
 
   return (
     <div className={classes.events}>

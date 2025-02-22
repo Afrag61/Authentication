@@ -21,7 +21,7 @@ function ErrorPage() {
 
   return (
     <>
-      <MainNavigation />
+      {/* <MainNavigation /> */}
       <PageContent title={title}>
         <p>{message}</p>
       </PageContent>
